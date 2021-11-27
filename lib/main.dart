@@ -9,6 +9,7 @@ import 'package:http/http.dart' as http;
 import 'package:flutter/services.dart' show ByteData, rootBundle;
 import 'package:path/path.dart';
 import 'package:path_provider/path_provider.dart';
+import 'package:image_picker/image_picker.dart';
 
 
 _asyncFileUpload(String text, File file) async{
@@ -28,6 +29,17 @@ _asyncFileUpload(String text, File file) async{
   var responseData = await response.stream.toBytes();
   var responseString = String.fromCharCodes(responseData);
   print(responseString);
+}
+
+_getFromGallery() async {
+  PickedFile? pickedFile = await ImagePicker().getImage(
+    source: ImageSource.gallery,
+  );
+  if (pickedFile != null) {
+    File imageFile = File(pickedFile.path);
+    return imageFile;
+  }
+
 }
 
 Future<File> getImageFileFromAssets(String path) async {
@@ -76,7 +88,10 @@ class Home extends StatelessWidget  {
 
   }
 
-
+  Future<void> foo2() async {
+    File f = await _getFromGallery();
+    _asyncFileUpload("sky", f);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -89,7 +104,7 @@ class Home extends StatelessWidget  {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           ElevatedButton(onPressed: foo, child: Text( "11111111" )),
-          ElevatedButton(onPressed: foo, child: Text( "11111111" )),
+          ElevatedButton(onPressed: foo2, child: Text( "11111111" )),
           ElevatedButton(onPressed: null, child: Text( "11111111" )),
           Image(image: AssetImage( "assets/sky-stars.jpg" ))
         ],

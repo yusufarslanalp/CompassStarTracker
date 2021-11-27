@@ -48,9 +48,19 @@ Future<File> getImageFileFromAssets(String path) async {
   final file = File('${(await getTemporaryDirectory()).path}/$path');
   await file.writeAsBytes(byteData.buffer.asUint8List(byteData.offsetInBytes, byteData.lengthInBytes));
 
-
-
   return file;
+}
+
+_getFromCamera() async {
+  PickedFile? pickedFile = await ImagePicker().getImage(
+    source: ImageSource.camera,
+    maxWidth: 1800,
+    maxHeight: 1800,
+  );
+  if (pickedFile != null) {
+    File imageFile = File(pickedFile.path);
+    return imageFile;
+  }
 }
 
 void main() => runApp(MyApp());
@@ -93,6 +103,11 @@ class Home extends StatelessWidget  {
     _asyncFileUpload("sky", f);
   }
 
+  Future<void> foo3() async {
+    File f = await _getFromCamera();
+    _asyncFileUpload("sky", f);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -103,9 +118,9 @@ class Home extends StatelessWidget  {
         crossAxisAlignment: CrossAxisAlignment.center,
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          ElevatedButton(onPressed: foo, child: Text( "11111111" )),
-          ElevatedButton(onPressed: foo2, child: Text( "11111111" )),
-          ElevatedButton(onPressed: null, child: Text( "11111111" )),
+          ElevatedButton(onPressed: foo, child: Text( "send asset" )),
+          ElevatedButton(onPressed: foo2, child: Text( "take from galery" )),
+          ElevatedButton(onPressed: foo3, child: Text( "take photo" )),
           Image(image: AssetImage( "assets/sky-stars.jpg" ))
         ],
       )),

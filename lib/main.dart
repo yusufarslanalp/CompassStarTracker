@@ -47,18 +47,48 @@ class Home extends StatelessWidget  {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Sample Code'),
+        title: const Text('Compass Star Tracker'),
       ),
-      body: Center(child: Column(
-        crossAxisAlignment: CrossAxisAlignment.center,
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          ElevatedButton(onPressed: null, child: Text( "get info" )),
-          ElevatedButton(onPressed: foo2, child: Text( "take from galery" )),
-          ElevatedButton(onPressed: foo3, child: Text( "take photo" )),
-          Image(image: AssetImage( "assets/sky-stars.jpg" ))
-        ],
-      )),
+      body: Container(
+        decoration: BoxDecoration(
+          image: DecorationImage(
+            image: AssetImage("assets/sky-stars.jpg"),
+            fit: BoxFit.cover,
+          ),
+        ),
+
+        child: Center(child: Column(
+
+          crossAxisAlignment: CrossAxisAlignment.center,
+          //mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            new SizedBox(
+              width: 120.0,
+              height: 40,
+              child: null,
+            ),
+            Image(image: AssetImage( "assets/logo.jpg" )),
+            new SizedBox(
+              width: 120.0,
+              height: 100,
+              child: null,
+            ),
+            new SizedBox(
+              width: 140.0,
+              child: ElevatedButton(onPressed: foo2, child: Text( "get info" ) ),
+            ),
+            new SizedBox(
+              width: 140.0,
+              child: ElevatedButton(onPressed: foo2, child: Text( "take from galery" )),
+            ),
+            new SizedBox(
+              width: 140.0,
+              child: ElevatedButton(onPressed: foo3, child: Text( "take photo" )),
+            )
+
+          ],
+        )),
+      ),
 
     );
   }

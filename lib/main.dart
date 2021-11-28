@@ -43,6 +43,14 @@ class Home extends StatelessWidget  {
     asyncFileUpload("sky", f);
   }
 
+  void goToMap( context, double lat, double long ){
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => MapSample( lat, long )),
+    );
+
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -73,9 +81,9 @@ class Home extends StatelessWidget  {
               height: 100,
               child: null,
             ),
-            new SizedBox(
+            SizedBox(
               width: 140.0,
-              child: ElevatedButton(onPressed: foo2, child: Text( "get info" ) ),
+              child: ElevatedButton(onPressed: () => goToMap( context, 40.8, 29.3 ), child: Text( "get info" ) ),
             ),
             new SizedBox(
               width: 140.0,

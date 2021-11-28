@@ -1,4 +1,7 @@
 import 'dart:async';
+import 'dart:collection';
+import 'dart:typed_data';
+import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
@@ -16,7 +19,16 @@ class MyApp extends StatelessWidget {
 */
 
 
+
+
+
+
 class MapSample extends StatefulWidget {
+  final double initialLat;
+  final double initialLong;
+
+  const MapSample( this.initialLat, this.initialLong );
+
   @override
   State<MapSample> createState() => MapSampleState();
 }
@@ -24,26 +36,43 @@ class MapSample extends StatefulWidget {
 class MapSampleState extends State<MapSample> {
   Completer<GoogleMapController> _controller = Completer();
 
-  static final CameraPosition _kGooglePlex = CameraPosition(
-    target: LatLng( 40.808806, 29.361068),
+
+  Set<Marker> _markers = HashSet<Marker>();
+
+  late CameraPosition _kGooglePlex = CameraPosition(
+    target: LatLng( widget.initialLat, widget.initialLong),
     zoom: 14.4746,
   );
 
-  static final CameraPosition _kLake = CameraPosition(
-      bearing: 192.8334901395799,
-      target: LatLng( 40.808806, 29.361068),
-      tilt: 59.440717697143555,
-      zoom: 19.151926040649414);
+
 
   @override
   Widget build(BuildContext context) {
+    _markers.add( Marker(
+      markerId: MarkerId('100'),
+      position: LatLng( widget.initialLat, widget.initialLong ),
+      infoWindow: InfoWindow(
+        title: "Finded Location",
+        snippet: "latitude: " +
+      widget.initialLat.toString() +
+          "  Longitude: " + widget.initialLong.toString()
+
+      )
+      //infoWindow: InfoWindow(title: 'Roça', snippet: 'Um bom lugar para estar'),
+      //icon: Icon( Icons.location_on  );
+    ));
+
+
+
     return new Scaffold(
       body: GoogleMap(
         mapType: MapType.hybrid,
         initialCameraPosition: _kGooglePlex,
         onMapCreated: (GoogleMapController controller) {
           _controller.complete(controller);
-        },
+          controller.showMarkerInfoWindow(MarkerId('100'));
+          },
+        markers: _markers,
       ),
       floatingActionButton: FloatingActionButton.extended(
         onPressed: _goToTheLake,

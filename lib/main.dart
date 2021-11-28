@@ -33,9 +33,14 @@ class MyApp extends StatelessWidget {
 class Home extends StatelessWidget  {
   const Home({Key? key}) : super(key: key);
 
-  Future<void> foo2() async {
+  Future<void> takeFromGalery( context ) async {
     File f = await getFromGallery();
-    asyncFileUpload("sky", f);
+    Cordinate crd = await asyncFileUpload("sky", f);
+
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => MapSample( crd.lat, crd.longi )),
+    );
   }
 
   Future<void> foo3() async {
@@ -87,7 +92,7 @@ class Home extends StatelessWidget  {
             ),
             new SizedBox(
               width: 140.0,
-              child: ElevatedButton(onPressed: foo2, child: Text( "take from galery" )),
+              child: ElevatedButton(onPressed: () => takeFromGalery( context ), child: Text( "take from galery" )),
             ),
             new SizedBox(
               width: 140.0,

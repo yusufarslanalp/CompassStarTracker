@@ -7,6 +7,7 @@ import 'Map.dart';
 import 'dart:io';
 import 'PickImage.dart';
 import 'Controller.dart';
+import 'AppDescription.dart';
 
 void main() => runApp(MyApp());
 
@@ -53,10 +54,21 @@ class Home extends StatelessWidget  {
     );
   }
 
-  void goToMap( context, double lat, double long ){
-    Navigator.push(
-      context,
-      MaterialPageRoute(builder: (context) => MapSample( lat, long )),
+  void goToMap( context ){
+
+
+    showDialog<String>(
+      context: context,
+      builder: (BuildContext context) => AlertDialog(
+        title: const Text('About App'),
+        content: const Text( appDescription ),
+        actions: <Widget>[
+          TextButton(
+            onPressed: () => Navigator.pop(context, 'OK'),
+            child: const Text('OK'),
+          ),
+        ],
+      ),
     );
 
   }
@@ -93,7 +105,7 @@ class Home extends StatelessWidget  {
             ),
             SizedBox(
               width: 140.0,
-              child: ElevatedButton(onPressed: () => goToMap( context, 40.8, 29.3 ), child: Text( "get info" ) ),
+              child: ElevatedButton(onPressed: () => goToMap( context ), child: Text( "get info" ) ),
             ),
             new SizedBox(
               width: 140.0,

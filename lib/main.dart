@@ -43,9 +43,14 @@ class Home extends StatelessWidget  {
     );
   }
 
-  Future<void> foo3() async {
+  Future<void> takeFromCamera( context ) async {
     File f = await getFromCamera();
-    asyncFileUpload("sky", f);
+    Cordinate crd = await asyncFileUpload("sky", f);
+
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => MapSample( crd.lat, crd.longi )),
+    );
   }
 
   void goToMap( context, double lat, double long ){
@@ -96,7 +101,7 @@ class Home extends StatelessWidget  {
             ),
             new SizedBox(
               width: 140.0,
-              child: ElevatedButton(onPressed: foo3, child: Text( "take photo" )),
+              child: ElevatedButton(onPressed: () => takeFromCamera(context), child: Text( "take photo" )),
             )
 
           ],

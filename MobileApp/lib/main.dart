@@ -9,7 +9,7 @@ import 'PickImage.dart';
 import 'Controller.dart';
 import 'AppDescription.dart';
 
-void main() => runApp(MyApp());
+void main() => runApp( MyApp() );
 
 
 

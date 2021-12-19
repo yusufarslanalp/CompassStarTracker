@@ -74,10 +74,6 @@ class MapSampleState extends State<MapSample> {
           },
         markers: _markers,
       ),
-      floatingActionButton: FloatingActionButton.extended(
-        onPressed: _goToTheLake,
-        label: Text('BTN'),
-      ),
     );
   }
 

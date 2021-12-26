@@ -49,3 +49,4 @@ app.*.map.json
 #API KEY
 android/app/src/main/AndroidManifest.xml
 
+a.txt

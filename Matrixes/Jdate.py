@@ -64,7 +64,8 @@ def date_to_jd(year,month,day):
     return jd
 
 
+
 jd = date_to_jd( 2021, 12, 7 )
-print( jd )
+#print( jd )
 
 

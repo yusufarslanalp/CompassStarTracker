@@ -1,3 +1,8 @@
+#from multiprocessing.connection import Client
+
+#address = ('localhost', 6000)
+#conn = Client(address, authkey='secret password')
+
 
 # INFORMATION
 # -----------
@@ -107,8 +112,13 @@ os.chdir(dir_sext)
 # Define el directorio de la imagen.
 imdir = dir_img_fits + nombre_img_fits
 # Define el sextractor.
-sext = 'sextractor ' + imdir
+sext = 'source-extractor ' + imdir
 # Se corre sextractor. Genera "test.cat" y se lee como tabla.
+
+print '-----------------------'
+print sext
+print '---------------------------'
+
 subprocess.check_output(sext, shell=True)
 sex_aux1 = ascii.read('./test.cat', format='sextractor')
 # Ordena por magnitud y selecciona las 40 estrellas mas brillantes.
@@ -553,3 +563,15 @@ print '- SExtractor:    ', time4 - time3, 'seconds.'
 print '- Match routines:', time5 - time4, 'seconds.'
 print '- Total time:    ', time5 - time1, 'seconds.'
 print '-.-'*20
+
+
+#conn.send( dep3_alpha1 )
+#conn.send( dep3_delta1 )
+#conn.send( match3_roll_d )
+
+#conn.send('close')
+# can also send arbitrary objects:
+# conn.send(['a', 2.5, None, int, sum])
+#conn.close()
+
+

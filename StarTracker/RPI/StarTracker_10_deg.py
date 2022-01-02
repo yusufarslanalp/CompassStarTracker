@@ -47,6 +47,10 @@ import numpy as np
 from PIL import Image
 from astropy.io import fits, ascii
 from astropy.table import Table
+import sys
+
+print sys.argv[0]
+print len( sys.argv )
 
 # 2.- Take the picture.
 
@@ -66,7 +70,11 @@ print '--- 0 0 ---'
 
 # Img .jpg name.
 #img_jpg_name = 'img.jpg'
-nombre_img_jpg = '26_07_-_20_52_00_image7_800.jpg'
+if( len( sys.argv ) == 1 ):
+	nombre_img_jpg = '26_07_-_20_52_00_image7_800.jpg'
+else:
+	nombre_img_jpg = sys.argv[1]
+	
 # Directorio imagen .jpg.
 dir_img_jpg = './Sample_images/' + nombre_img_jpg
 # Directorio donde se guarda imagen .fits.

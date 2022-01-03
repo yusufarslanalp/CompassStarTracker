@@ -20,7 +20,7 @@ class Cordinate{
 Future<Cordinate>
 asyncFileUpload(String text, File file) async{
   //create multipart request for POST or PATCH method
-  var request = http.MultipartRequest("POST", Uri.parse("http://192.168.1.70:80/image"));
+  var request = http.MultipartRequest("POST", Uri.parse("http://192.168.1.79:80/image"));
   //add text fields
   request.fields["image124"] = text;
   //create multipart using filepath, string or bytes

@@ -40,7 +40,7 @@ class Image(Resource):
         #if file and allowed_file(file.filename):
         print( "HEREEE2" )
         #filename = secure_filename(file.filename)
-        file.save( "fff.png" )
+        file.save( "ReceivedImages/" + file.filename )
         """new_image = Image(
             path= ".",
             filename="fff.png",

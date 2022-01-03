@@ -1,8 +1,10 @@
-#from multiprocessing.connection import Client
+from multiprocessing.connection import Client
 
-#address = ('localhost', 6000)
-#conn = Client(address, authkey='secret password')
-
+address = ('localhost', 6000)
+conn = Client(address, authkey='secret password')
+#conn.send('starrr')
+#msg = conn.recv()
+#print msg 
 
 # INFORMATION
 # -----------
@@ -68,13 +70,17 @@ print '--- 0 0 ---'
 print Cur_Dir
 print '--- 0 0 ---'
 
+img_name = conn.recv()
+print img_name
+
 # Img .jpg name.
 #img_jpg_name = 'img.jpg'
 if( len( sys.argv ) == 1 ):
 	nombre_img_jpg = '26_07_-_20_52_00_image7_800.jpg'
 else:
 	nombre_img_jpg = sys.argv[1]
-	
+
+print nombre_img_jpg
 # Directorio imagen .jpg.
 dir_img_jpg = './Sample_images/' + nombre_img_jpg
 # Directorio donde se guarda imagen .fits.
@@ -573,11 +579,11 @@ print '- Total time:    ', time5 - time1, 'seconds.'
 print '-.-'*20
 
 
-#conn.send( dep3_alpha1 )
-#conn.send( dep3_delta1 )
-#conn.send( match3_roll_d )
+conn.send( dep3_alpha1 )
+conn.send( dep3_delta1 )
+conn.send( match3_roll_d )
 
-#conn.send('close')
+conn.send('close')
 # can also send arbitrary objects:
 # conn.send(['a', 2.5, None, int, sum])
 #conn.close()

@@ -17,7 +17,7 @@ class Image(Resource):
 
     def post( self ):
 
-
+        print( "imageeeeeeeeeeeeeee" )
         file = request.files['file_field']
         
         if file.filename == '':
@@ -39,4 +39,4 @@ api.add_resource( Image, '/image')
 
 
 #app.run(debug=True)
-app.run(host='0.0.0.0', port=80)
+app.run(host='0.0.0.0', port=5000)

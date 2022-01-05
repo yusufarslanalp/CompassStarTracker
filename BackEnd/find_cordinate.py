@@ -9,7 +9,8 @@ import math as math
 
 def get_date_taken( path ):
     try:
-        return Image.open( path )._getexif()[36867]
+        str_time=  Image.open( path )._getexif()[36867]
+        return datetime.datetime.strptime( str_time, '%Y:%m:%d %H:%M:%S' )
     except:
         return datetime.datetime.now()
 
@@ -40,23 +41,30 @@ def find_attitude():
 #returns lat long
 def find_cordinate( image_name ):
     date_taken = get_date_taken( "ReceivedImages/" + image_name )
-    print( date_taken )
+    #print( "date::::::::::::::::::::::::::::::" + str( date_taken ) )
 
     A_IG = A_GI.calc_A_IG( date_taken )
-    print( A_IG )
+
     ra, dec, roll = find_attitude()
     A_BI = A_BI_file.find_A_BI( ra, dec, roll )
+
 
     A = np.matmul( A_BI , A_IG )
 
     lat = math.acos( A[2][2] )
-    long = math.atan( A[2][1] / A[2][0] )
-
-    print( "---------------------------------------------" )
-    print( long )
+    longi = math.atan( A[2][1] / A[2][0] )
 
 
-    return { "lat": 40.809, "longi": 29.362 }
+    print( "lat: " + str( math.degrees( lat ) ) )
+    print( "longi: " + str( math.degrees( longi ) ) )
 
 
-find_cordinate( r"C:\Users\yusuf\AndroidStudioProjects\CompassStarTracker\BackEnd\StarTracker\RPI\Sample_images\26_07_-_20_27_08_image6_700.jpg" )
+    return { "lat": lat, "longi": longi }
+
+
+find_cordinate( r"26_07_-_20_41_51_image6_700.jpg" )
+
+#d = datetime.datetime.strptime( '2016:07:26 20:42:38', '%Y:%m:%d %H:%M:%S' )
+#print( d )
+
+

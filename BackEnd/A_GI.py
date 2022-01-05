@@ -13,8 +13,8 @@ arr = [ cos( radians( 60 ) ), cos( radians( 30 ) ) ]
 
 def R3( deg ):
     return [ 
-        [ cos( deg ), -sin( deg ), 0 ],
-        [ sin( deg ), cos( deg ),  0 ],
+        [ cos( deg ), sin( deg ), 0 ],
+        [ -sin( deg ), cos( deg ),  0 ],
         [ 0,              0,       1 ]
      ]
 

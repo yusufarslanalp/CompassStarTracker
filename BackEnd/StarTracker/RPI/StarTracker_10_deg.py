@@ -71,9 +71,10 @@ if( len( sys.argv ) == 1 ):
 else:
 	nombre_img_jpg = sys.argv[1]
 
+print "nombreeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee"
 print nombre_img_jpg
 # Directorio imagen .jpg.
-dir_img_jpg = './Sample_images/' + nombre_img_jpg
+dir_img_jpg = '../../ReceivedImages/' + nombre_img_jpg
 # Directorio donde se guarda imagen .fits.
 dir_img_fits = Cur_Dir
 # Nombre imagen .fits.

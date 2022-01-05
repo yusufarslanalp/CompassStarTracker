@@ -19,11 +19,12 @@ class Image(Resource):
 
         print( "imageeeeeeeeeeeeeee" )
         file = request.files['file_field']
-        
+        print( file.filename )
         if file.filename == '':
             flash('No selected file')
             return redirect(request.url)
 
+        print( "Before saveeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee" )
         #filename = secure_filename(file.filename)
         file.save( "ReceivedImages/" + file.filename )
 

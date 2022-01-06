@@ -14,8 +14,8 @@ Second information needed for cordinate estimation is the time image was taken. 
 - Each part has own README.md file.
 - The mobile application part is an mobile application.
 - With mobile application user takes a photo. And application sends taken photo to BacEnd application.
-- BackEnd application estimate cordinate from sended image. an response cordinade to mobile application.
-- Mobile application shows cordinates on maps in the application.
+- BackEnd application estimate cordinate from sended image. And response coordinade to the mobile application.
+- The mobile application shows coordinates on maps in the application.
 
 ## Demo
 [YouTube Demo Video]( https://www.youtube.com/watch?v=SVofps3m79Y )

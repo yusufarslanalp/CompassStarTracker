@@ -6,4 +6,4 @@ This project is a server. To start the server run [server.py](server.py) file wi
 - The server find cordinate using attitude values and time. Cordinate is in terms of latitude and longitude.
 - The server returns cordinate as http response.
 
-This project run on Linux. Python2 and Python3 should be inslalled on the machine for ruuning project
+This project run on Linux. Python2 and Python3 should be inslalled on the machine for running project

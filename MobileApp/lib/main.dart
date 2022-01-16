@@ -109,11 +109,11 @@ class Home extends StatelessWidget  {
             ),
             new SizedBox(
               width: 140.0,
-              child: ElevatedButton(onPressed: () => takeFromGalery( context ), child: Text( "take from galery" )),
+              child: ElevatedButton(onPressed: () => takeFromCamera(context), child: Text( "take photo" )),
             ),
             new SizedBox(
               width: 140.0,
-              child: ElevatedButton(onPressed: () => takeFromCamera(context), child: Text( "take photo" )),
+              child: ElevatedButton(onPressed: () => takeFromGalery( context ), child: Text( "take from galery" )),
             )
 
           ],

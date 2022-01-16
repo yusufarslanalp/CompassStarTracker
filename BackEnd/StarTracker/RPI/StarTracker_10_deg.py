@@ -43,8 +43,8 @@ from astropy.io import fits, ascii
 from astropy.table import Table
 import sys
 
-print sys.argv[0]
-print len( sys.argv )
+"""print sys.argv[0]
+print len( sys.argv )"""
 
 # 2.- Take the picture.
 
@@ -58,9 +58,9 @@ time3 = time.time()
 # Get current directory.
 Cur_Dir = os.path.dirname(os.path.abspath(__file__)) + '/'
 
-print '--- 0 0 ---'
+"""print '--- 0 0 ---'
 print Cur_Dir
-print '--- 0 0 ---'
+print '--- 0 0 ---'"""
 
 
 
@@ -71,8 +71,6 @@ if( len( sys.argv ) == 1 ):
 else:
 	nombre_img_jpg = sys.argv[1]
 
-print "nombreeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee"
-print nombre_img_jpg
 # Directorio imagen .jpg.
 dir_img_jpg = '../../ReceivedImages/' + nombre_img_jpg
 # Directorio donde se guarda imagen .fits.
@@ -121,9 +119,9 @@ imdir = dir_img_fits + nombre_img_fits
 sext = 'source-extractor ' + imdir
 # Se corre sextractor. Genera "test.cat" y se lee como tabla.
 
-print '-----------------------'
+"""print '-----------------------'
 print sext
-print '---------------------------'
+print '---------------------------'"""
 
 subprocess.check_output(sext, shell=True)
 sex_aux1 = ascii.read('./test.cat', format='sextractor')
@@ -209,7 +207,7 @@ else:
     ## Reordena la tabla por menor 'Nr'.
     match1_tabla1.sort('Nr')
     match1_tabla1.reverse()
-    print match1_tabla1
+    #print match1_tabla1
     # Seleccion del resultado correcto.
     if len(match1_tabla1) >= 3:
         a = match1_tabla1[0]['sig']
@@ -294,7 +292,7 @@ else:
     match1_roll_r = np.arctan2(match1_c, match1_b)
     match1_roll_d = (180/np.pi)*match1_roll_r
     # Prints.
-    print '--/'*20
+    """print '--/'*20
     print 'Los resultados son:'
     print 'RA_center =', match1_RA_new
     print 'DEC_center =', match1_DEC_new
@@ -303,7 +301,7 @@ else:
     print 'Nr =', match1_nr3
     print 'Nm =', match1_nm3
     print 'Catalogo => ', 'RA =', match1_RA, '/', 'DEC =', match1_DEC
-    print '--/'*20
+    print '--/'*20 """
 
 ## 7.- Deproyeccion del punto (0, 0) de la camara.
 
@@ -318,10 +316,10 @@ dep1_alpha1 = match1_RA + (180/np.pi)*dep1_arg2
 dep1_arg3 = np.sin(dep1_arg2)
 dep1_arg4 = dep1_eta*np.cos(dep1_DEC_r) + np.sin(dep1_DEC_r)
 dep1_delta1 = (180/np.pi)*np.arctan((dep1_arg3*dep1_arg4)/dep1_xi)
-print '-'*20
+"""print '-'*20
 print 'RA =', dep1_alpha1
 print 'DEC =', dep1_delta1
-print '-'*20
+print '-'*20"""
 
 ## 8.- Busqueda y lectura de objetos de catalogo con los que se hizo match.
 
@@ -427,12 +425,12 @@ match2_DEC_new = match2_X_cielo[1]
 match2_roll_r = np.arctan2(match2_c, match2_b)
 match2_roll_d = (180/np.pi)*match2_roll_r
 # Prints.
-print 'Los resultados son:'
+"""print 'Los resultados son:'
 print 'RA_center =', match2_RA_new
 print 'DEC_center =', match2_DEC_new
 print 'Roll =', match2_roll_d
 print 'sig =', match2_sig
-print 'Nr =', match2_nr
+print 'Nr =', match2_nr"""
 
 ## 11.- Nueva deproyeccion del punto (0, 0) de la camara.
 
@@ -446,10 +444,10 @@ dep2_alpha1 = dep1_alpha1 + (180/np.pi)*dep2_arg2
 dep2_arg3 = np.sin(dep2_arg2)
 dep2_arg4 = dep2_eta*np.cos(dep2_DEC_r) + np.sin(dep2_DEC_r)
 dep2_delta1 = (180/np.pi)*np.arctan((dep2_arg3*dep2_arg4)/dep2_xi)
-print '-'*20
+"""print '-'*20
 print 'RA =', dep2_alpha1
 print 'DEC =', dep2_delta1
-print '-'*20
+print '-'*20"""
 
 ## 12.- Conversion de coordenadas de estrellas de match a plano tangente.
 
@@ -533,14 +531,14 @@ match3_DEC_new = match3_X_cielo[1]
 match3_roll_r = np.arctan2(match3_c, match3_b)
 match3_roll_d = (180/np.pi)*match3_roll_r
 # Prints.
-print '-'*20
+"""print '-'*20
 print 'Los resultados son:'
 print 'RA_center =', match3_RA_new
 print 'DEC_center =', match3_DEC_new
 print 'Roll =', match3_roll_d
 print 'sig =', match3_sig
 print 'Nr =', match3_nr
-print '-'*20
+print '-'*20"""
 
 ## 14.- Nueva deproyeccion del punto (0, 0) de la camara.
 
@@ -554,21 +552,21 @@ dep3_alpha1 = dep2_alpha1 + (180/np.pi)*dep3_arg2
 dep3_arg3 = np.sin(dep3_arg2)
 dep3_arg4 = dep3_eta*np.cos(dep3_DEC_r) + np.sin(dep3_DEC_r)
 dep3_delta1 = (180/np.pi)*np.arctan((dep3_arg3*dep3_arg4)/dep3_xi)
-print '-'*20
+"""print '-'*20
 print 'RA =', dep3_alpha1
 print 'DEC =', dep3_delta1
-print '-'*20
+print '-'*20"""
 
 time5 = time.time()
 
-print '-.-'*20
+"""print '-.-'*20
 print 'Processing time:'
 print '- Imports:       ', time2 - time1, 'seconds.'
 print '- Picture:       ', time3 - time2, 'seconds.'
 print '- SExtractor:    ', time4 - time3, 'seconds.'
 print '- Match routines:', time5 - time4, 'seconds.'
 print '- Total time:    ', time5 - time1, 'seconds.'
-print '-.-'*20
+print '-.-'*20"""
 
 f = open("ProcessCommunication.txt", "w")
 f.write( str( dep3_alpha1 ) + ' ' )

@@ -10,9 +10,6 @@ import math as math
 def get_date_taken( path ):
     try:
         str_time=  Image.open( path )._getexif()[36867]
-        print ( "belowwwwwwwwwwwwwwwwwwwwwwwwwww" )
-        print( path )
-        print( str_time )
         return datetime.datetime.strptime( str_time, '%Y:%m:%d %H:%M:%S' )
     except:
         return datetime.datetime.now()
@@ -22,7 +19,6 @@ def find_attitude( image_name ):
     currentDir = Path( os.getcwd() )
     dirStarTracker = Path.joinpath( currentDir, "StarTracker" )
     dirRPI = Path.joinpath( dirStarTracker, "RPI" )
-    print( dirRPI )
 
 
     os.chdir( str( dirRPI ) )
@@ -30,14 +26,16 @@ def find_attitude( image_name ):
 
 
     os.system( "python2 StarTracker_10_deg.py " + image_name )
-    print( "hereeeeeeeeeeeeeeeeeeeee" )
-
 
     f = open("ProcessCommunication.txt", "r")
     arr = f.read().split( " " )
-    ra, dec, roll = float( arr[0] ), float( arr[1] ), float( arr[2] )
 
-    #print( f.read().split( " " ) )
+    ra, dec, roll = float( arr[0] ), float( arr[1] ), float( arr[2] )
+    print( "\n\n\n" )
+    print( "----------------------Attitude Information ----------------------" )
+    print( "RA: " + str(ra) )
+    print( "DEC: " + str(dec) )
+    print( "ROLL: "+ str(roll) )
     f.close()
     
     os.chdir( str( currentDir ) )
@@ -46,15 +44,25 @@ def find_attitude( image_name ):
 #returns lat long
 def find_cordinate( image_name ):
     date_taken = get_date_taken( "ReceivedImages/" + image_name )
-    print( "date::::::::::::::::::::::::::::::" + str( date_taken ) )
+    
 
     A_IG = A_GI.calc_A_IG( date_taken )
+    
+
 
     ra, dec, roll = find_attitude( image_name )
     A_BI = A_BI_file.find_A_BI( ra, dec, roll )
 
 
     A = np.matmul( A_BI , A_IG )
+    
+    print( "-----------The time the image was taken-------------" )
+    print( str( date_taken ) )
+    
+    print( "---------------------Calculated Rotations------------------------" )
+    print( "A_BI: \n" + str( A_BI ) + "\n"  )
+    print( "A_IG: \n" + str( A_IG ) + "\n"  )
+    print( "A_BG: \n" + str( A ) + "\n"  )
 
     lat = math.acos( A[2][2] )
     lat = math.degrees( lat )
@@ -65,6 +73,7 @@ def find_cordinate( image_name ):
     #lat = lat - 10
     #longi = longi - 30
 
+    print( "---------------------the determined cordinate------------------------" )
     print( "lat: " + str( lat ) )
     print( "longi: " + str( longi ) )
 

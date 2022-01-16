@@ -17,20 +17,18 @@ class Image(Resource):
 
     def post( self ):
 
-        print( "imageeeeeeeeeeeeeee" )
+        print( "image processing....." )
         file = request.files['file_field']
-        print( file.filename )
+        #print( file.filename )
         if file.filename == '':
             flash('No selected file')
             return redirect(request.url)
 
-        print( "Before saveeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee" )
-        #filename = secure_filename(file.filename)
         file.save( "ReceivedImages/" + file.filename )
 
 
 
-        print( "Before return" )
+        #print( "Before return" )
         return fc.find_cordinate( file.filename )
 
 

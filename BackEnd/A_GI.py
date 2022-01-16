@@ -51,7 +51,8 @@ def calc_A_GI( idate ):
     return A_GI
 
 def calc_A_IG( idate ):
-    return calc_A_GI( idate ).transpose()
+    result = calc_A_GI( idate ).transpose()
+    return result
 
 #A_IG = calc_A_IG( datetime.datetime.now() )
 #   print( A_IG )

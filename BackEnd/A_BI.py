@@ -32,9 +32,10 @@ def find_A_BI( ra, dec, roll ):
     pitch = radians( dec )
     roll = radians( roll )
 
+
     return euler_to_rotMat( yaw, pitch, roll )
 
-print( find_A_BI( 212, -52, -72 ) )
+#print( find_A_BI( 212, -52, -72 ) )
 
 
 

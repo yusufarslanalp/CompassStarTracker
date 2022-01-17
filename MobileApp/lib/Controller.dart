@@ -7,8 +7,10 @@ import 'dart:convert';
 class Cordinate{
   double lat;
   double longi;
+  bool isSuccessfull = true;
   
-  Cordinate( this.lat, this.longi ){}
+  Cordinate( this.lat, this.longi ){
+  }
   
   @override
   String toString() {
@@ -40,9 +42,16 @@ asyncFileUpload(String text, File file) async{
 
   double lat = map['lat'];
   double longi = map['longi'];
+  String isSuccessfull = map[ 'isSuccessfull' ];
+
+  Cordinate result = Cordinate(lat, longi);
+  if( isSuccessfull == "false" )
+  {
+    result.isSuccessfull = false;
+  }
 
   print( lat );
   print( longi );
 
-  return Cordinate(lat, longi);
+  return result;
 }

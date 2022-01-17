@@ -38,15 +38,36 @@ class Home extends StatelessWidget  {
     File f = await getFromGallery();
     Cordinate crd = await asyncFileUpload("sky", f);
 
-    Navigator.push(
-      context,
-      MaterialPageRoute(builder: (context) => MapSample( crd.lat, crd.longi )),
-    );
+    if( crd.isSuccessfull == false )
+    {
+      showDialog<String>(
+        context: context,
+        builder: (BuildContext context) => AlertDialog(
+          title: const Text('Not suitable image'),
+          content: const Text( "The selected image is not suitable for finding coordinate from it" ),
+          actions: <Widget>[
+            TextButton(
+              onPressed: () => Navigator.pop(context, 'OK'),
+              child: const Text('OK'),
+            ),
+          ],
+        ),
+      );
+    }
+    else{
+      Navigator.push(
+        context,
+        MaterialPageRoute(builder: (context) => MapSample( crd.lat, crd.longi )),
+      );
+    }
+
   }
 
   Future<void> takeFromCamera( context ) async {
     File f = await getFromCamera();
     Cordinate crd = await asyncFileUpload("sky", f);
+
+
 
     Navigator.push(
       context,

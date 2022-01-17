@@ -14,6 +14,7 @@ def get_date_taken( path ):
     except:
         return datetime.datetime.now()
 
+#returns ra, dec, roll, isSuccessfull
 def find_attitude( image_name ):
     
     currentDir = Path( os.getcwd() )
@@ -25,7 +26,11 @@ def find_attitude( image_name ):
     os.system( "ls" )
 
 
-    os.system( "python2 StarTracker_10_deg.py " + image_name )
+    status = os.system( "python2 StarTracker_10_deg.py " + image_name )
+    print( "status::::::::::::::::::::::::::::::::::::.::::::" + str( status ) )
+    if( status != 0 ):
+        os.chdir( str( currentDir ) )
+        return 0, 0, 0, False
 
     f = open("ProcessCommunication.txt", "r")
     arr = f.read().split( " " )
@@ -39,7 +44,7 @@ def find_attitude( image_name ):
     f.close()
     
     os.chdir( str( currentDir ) )
-    return ra, dec, roll
+    return ra, dec, roll, True
 
 #returns lat long
 def find_cordinate( image_name ):
@@ -50,7 +55,10 @@ def find_cordinate( image_name ):
     
 
 
-    ra, dec, roll = find_attitude( image_name )
+    ra, dec, roll, is_successfull = find_attitude( image_name )
+    if( is_successfull == False ):
+        print( "Image is not successfulllllllllllllllllllllllll" )
+        return { "lat": 0.0, "longi": 0.0, "isSuccessfull": "false" }
     A_BI = A_BI_file.find_A_BI( ra, dec, roll )
 
 
@@ -78,7 +86,7 @@ def find_cordinate( image_name ):
     print( "longi: " + str( longi ) )
 
 
-    return { "lat": lat, "longi": longi }
+    return { "lat": lat, "longi": longi, "isSuccessfull": "true" }
 
 
 #find_cordinate( r"26_07_-_21_01_51_image8_900.jpg" )

@@ -27,7 +27,6 @@ def find_attitude( image_name ):
 
 
     status = os.system( "python2 StarTracker_10_deg.py " + image_name )
-    print( "status::::::::::::::::::::::::::::::::::::.::::::" + str( status ) )
     if( status != 0 ):
         os.chdir( str( currentDir ) )
         return 0, 0, 0, False
@@ -57,7 +56,7 @@ def find_cordinate( image_name ):
 
     ra, dec, roll, is_successfull = find_attitude( image_name )
     if( is_successfull == False ):
-        print( "Image is not successfulllllllllllllllllllllllll" )
+        print( "Image is not successfull" )
         return { "lat": 0.0, "longi": 0.0, "isSuccessfull": "false" }
     A_BI = A_BI_file.find_A_BI( ra, dec, roll )
 

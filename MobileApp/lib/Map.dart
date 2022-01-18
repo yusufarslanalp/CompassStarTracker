@@ -41,7 +41,7 @@ class MapSampleState extends State<MapSample> {
 
   late CameraPosition _kGooglePlex = CameraPosition(
     target: LatLng( widget.initialLat, widget.initialLong),
-    zoom: 14.4746,
+    zoom: 0.0,
   );
 
 
@@ -68,6 +68,7 @@ class MapSampleState extends State<MapSample> {
       body: GoogleMap(
         mapType: MapType.hybrid,
         initialCameraPosition: _kGooglePlex,
+
         onMapCreated: (GoogleMapController controller) {
           _controller.complete(controller);
           controller.showMarkerInfoWindow(MarkerId('100'));

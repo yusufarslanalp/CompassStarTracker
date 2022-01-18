@@ -72,7 +72,7 @@ def find_cordinate( image_name ):
     print( "A_BG: \n" + str( A ) + "\n"  )
 
     lat = math.acos( A[2][2] )
-    lat = math.degrees( lat )
+    lat = -math.degrees( lat )
     longi = math.atan( A[2][1] / A[2][0] )
     longi = math.degrees( longi )
 
